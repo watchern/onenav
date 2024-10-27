@@ -141,7 +141,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
     //console.log(obj)
     if(obj.event === 'del'){
       layer.confirm('确认删除？',{icon: 3, title:'温馨提示！'}, function(index){
-        $.post('/index.php?c=api&method=del_category',{'id':obj.data.id},function(data,status){
+        $.post('./index.php?c=api&method=del_category',{'id':obj.data.id},function(data,status){
             
             if(data.code == 0){
                 obj.del();
@@ -154,7 +154,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
       });
     } else if(obj.event === 'edit'){
       // 这是原来老的逻辑，跳转到新的页面进行编辑，不太友好
-      // window.location.href = '/index.php?c=admin&page=edit_category&id=' + obj.data.id;
+      // window.location.href = './index.php?c=admin&page=edit_category&id=' + obj.data.id;
       // 新的逻辑改为当前页面iframe编辑
       layer.open({
         type: 2,
@@ -162,7 +162,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
         shadeClose: true,
         maxmin: true, //开启最大化最小化按钮
         area: ['900px', '660px'],
-        content: '/index.php?c=admin&page=edit_category_new&id=' + obj.data.id
+        content: './index.php?c=admin&page=edit_category_new&id=' + obj.data.id
       });
     }
   });
@@ -238,7 +238,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
         else{
           layer.confirm('确认删除选中数据？',{icon: 3, title:'温馨提示！'}, function(index){
             for (let i = 0; i < data.length; i++) {
-              // $.post('/index.php?c=api&method=del_link',{'id':data[i].id},function(data,status){
+              // $.post('./index.php?c=api&method=del_link',{'id':data[i].id},function(data,status){
               //   if(data.code == 0){
                   
               //   }
@@ -247,7 +247,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
               //   }
               // });
               $.ajax({
-                'url': '/index.php?c=api&method=del_link',
+                'url': './index.php?c=api&method=del_link',
                 'type': 'POST',
                 'async': false,
                 'data':{'id':data[i].id}
@@ -290,7 +290,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
               id.push(data[i].id);
             }
             
-            $.post("/index.php?c=api&method=batch_modify_category",{id:id,fid:fid},function(data,status){
+            $.post("./index.php?c=api&method=batch_modify_category",{id:id,fid:fid},function(data,status){
                 if (data.msg === "success") {
                   layer.msg("修改成功！",{icon:1});
                   setTimeout(() => {
@@ -347,7 +347,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
     //console.log(obj)
     if(obj.event === 'del'){
       layer.confirm('确认删除？',{icon: 3, title:'温馨提示！'}, function(index){
-        $.post('/index.php?c=api&method=del_link',{'id':obj.data.id},function(data,status){
+        $.post('./index.php?c=api&method=del_link',{'id':obj.data.id},function(data,status){
             if(data.code == 0){
                 obj.del();
             }
@@ -358,7 +358,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
         layer.close(index);
       });
     } else if(obj.event === 'edit'){
-      // window.location.href = '/index.php?c=admin&page=edit_link&id=' + obj.data.id;
+      // window.location.href = './index.php?c=admin&page=edit_link&id=' + obj.data.id;
       let height = window.innerHeight;
       if( height >= 800 ) {
         height = 800;
@@ -373,17 +373,17 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
         shadeClose: true,
         maxmin: true, //开启最大化最小化按钮
         area: ['1000px', height + 'px'],
-        content: '/index.php?c=admin&page=edit_link_new&id=' + obj.data.id
+        content: './index.php?c=admin&page=edit_link_new&id=' + obj.data.id
       });
     }
   });
 
   //登录
   form.on('submit(login)', function(data){
-    $.post('/index.php?c=login&check=login',data.field,function(data,status){
+    $.post('./index.php?c=login&check=login',data.field,function(data,status){
       //如果添加成功
       if(data.code == 0) {
-        window.location.href = '/index.php?c=admin';
+        window.location.href = './index.php?c=admin';
       }
       else{
         layer.msg(data.err_msg, {icon: 5});
@@ -403,10 +403,10 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
       layer.msg('用户名或密码不能为空！', {icon: 5});
       return false;
     }
-    $.post('/index.php?c=login&check=login',{user:user,password:password},function(data,status){
+    $.post('./index.php?c=login&check=login',{user:user,password:password},function(data,status){
       //如果添加成功
       if(data.code == 0) {
-        window.location.href = '/index.php?c=admin';
+        window.location.href = './index.php?c=admin';
       }
       else{
         layer.msg(data.err_msg, {icon: 5});
@@ -439,12 +439,12 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
       layer.msg("两次密码不一致！", {icon: 5});
       return false;
     }
-    $.post('/index.php?c=init',data.field,function(data,status){
+    $.post('./index.php?c=init',data.field,function(data,status){
       //如果添加成功
       if(data.code == 200) {
         layer.msg(data.msg, {icon: 1});
         setTimeout(() => {
-          window.location.href = "/index.php?c=login";
+          window.location.href = "./index.php?c=login";
         }, 2000);
       }
       else{
@@ -456,7 +456,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   });
   //手机登录
   form.on('submit(mobile_login)', function(data){
-    $.post('/index.php?c=login&check=login',data.field,function(data,status){
+    $.post('./index.php?c=login&check=login',data.field,function(data,status){
       //如果登录成功
       if(data.code == 0) {
         window.location.href = '/';
@@ -480,10 +480,10 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
       return false;
     }
 
-    $.post('/index.php?c=login&check=login',{user:user,password:password},function(data,status){
+    $.post('./index.php?c=login&check=login',{user:user,password:password},function(data,status){
       //如果登录成功
       if(data.code == 0) {
-        window.location.href = '/index.php?c=mobile';
+        window.location.href = './index.php?c=mobile';
       }
       else{
         layer.msg(data.err_msg, {icon: 5});
@@ -568,7 +568,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   //保存站点设置
   form.on('submit(set_site)', function(data){
     var index = layer.load(1);
-    $.post('/index.php?c=api&method=set_site',data.field,function(data,status){
+    $.post('./index.php?c=api&method=set_site',data.field,function(data,status){
       if(data.code == 0) {
         layer.closeAll('loading');
         layer.msg(data.data, {icon: 1});
@@ -639,7 +639,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
    //保存站点设置
    form.on('submit(set_transition_page)', function(data){
     var index = layer.load(1);
-    $.post('/index.php?c=api&method=set_transition_page',data.field,function(data,status){
+    $.post('./index.php?c=api&method=set_transition_page',data.field,function(data,status){
       if(data.code == 0) {
         layer.closeAll('loading');
         layer.msg(data.data, {icon: 1});
@@ -655,7 +655,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
 
   //添加分类目录
   form.on('submit(add_category)', function(data){
-    $.post('/index.php?c=api&method=add_category',data.field,function(data,status){
+    $.post('./index.php?c=api&method=add_category',data.field,function(data,status){
       //如果添加成功
       if(data.code == 0) {
         layer.msg('已添加！', {icon: 1});
@@ -669,7 +669,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   });
   //添加自定义js
   form.on('submit(add_js)', function(data){
-    $.post('/index.php?c=api&method=add_js',data.field,function(data,status){
+    $.post('./index.php?c=api&method=add_js',data.field,function(data,status){
       //如果添加成功
       if(data.code == 0) {
         layer.msg('已添加！', {icon: 1});
@@ -683,7 +683,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   });
   //修改分类目录
   form.on('submit(edit_category)', function(data){
-    $.post('/index.php?c=api&method=edit_category',data.field,function(data,status){
+    $.post('./index.php?c=api&method=edit_category',data.field,function(data,status){
       //如果添加成功
       if(data.code == 0) {
         layer.msg('已修改！', {icon: 1});
@@ -699,7 +699,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   //生成token
   form.on('submit(create_sk)', function(data){
     if( data.field.SecretKey == '' ) {
-      $.post('/index.php?c=api&method=create_sk',data.field,function(data,status){
+      $.post('./index.php?c=api&method=create_sk',data.field,function(data,status){
         //如果添加成功
         if(data.code == 0) {
           $("#SecretKey").val(data.data);
@@ -721,7 +721,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   //更换token
   form.on('submit(change_sk)', function(data){
     if( data.field.SecretKey != '' ) {
-      $.post('/index.php?c=api&method=create_sk',data.field,function(data,status){
+      $.post('./index.php?c=api&method=create_sk',data.field,function(data,status){
         //如果添加成功
         if(data.code == 0) {
           $("#SecretKey").val(data.data);
@@ -785,7 +785,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
 
   //添加链接
   form.on('submit(add_link)', function(data){
-    $.post('/index.php?c=api&method=add_link',data.field,function(data,status){
+    $.post('./index.php?c=api&method=add_link',data.field,function(data,status){
       //如果添加成功
       if(data.code == 0) {
         //重新设置图标
@@ -806,7 +806,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   });
   //识别链接信息
   form.on('submit(get_link_info)', function(data){
-    $.post('/index.php?c=api&method=get_link_info',data.field.url,function(data,status){
+    $.post('./index.php?c=api&method=get_link_info',data.field.url,function(data,status){
       //如果添加成功
       if(data.code == 0) {
         console.log(data);
@@ -820,7 +820,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   });
   //更新链接
   form.on('submit(edit_link)', function(data){
-    $.post('/index.php?c=api&method=edit_link&type=console',data.field,function(data,status){
+    $.post('./index.php?c=api&method=edit_link&type=console',data.field,function(data,status){
       //如果添加成功
       if(data.code == 0) {
         layer.msg('已更新！', {icon: 1});
@@ -835,7 +835,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   //识别链接信息
   form.on('submit(get_link_info)', function(data){
     //是用ajax异步加载
-    $.post('/index.php?c=api&method=get_link_info',data.field,function(data,status){
+    $.post('./index.php?c=api&method=get_link_info',data.field,function(data,status){
       //如果添加成功
       if(data.code == 0) {
         console.log(data);
@@ -851,7 +851,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
   //识别链接信息
   form.on('submit(imp_link)', function(data){
     //用ajax异步加载
-    $.post('/index.php?c=api&method=import_link',data.field,function(data,status){
+    $.post('./index.php?c=api&method=import_link',data.field,function(data,status){
       //如果添加成功
       if(data.code == 200) {
         layer.open({
@@ -931,7 +931,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
 function get_link_info() {
     var url = $("#url").val();
     var index = layer.load(1);
-    $.post('/index.php?c=api&method=get_link_info',{url:url},function(data,status){
+    $.post('./index.php?c=api&method=get_link_info',{url:url},function(data,status){
       //如果添加成功
       if(data.code == 0) {
         if(data.data.title != null) {
@@ -987,7 +987,7 @@ function del_category(id){
 
 //弱密码检查
 function check_weak_password(){
-  $.get("/index.php?c=api&method=check_weak_password",function(data,status){
+  $.get("./index.php?c=api&method=check_weak_password",function(data,status){
     if (data.err_msg === 'Weak password!') {
       layui.use('layer', function(){
         var layer = layui.layer;
@@ -1006,7 +1006,7 @@ function check_db_down(){
   $.ajax({
     type:"HEAD",
     async:false,
-    url:"/data/onenav.db3",
+    url:"./data/onenav.db3",
     statusCode: {
       200: function() {
         $("#console_log").append("危险！！！危险！！！危险！！！数据库可被下载，请尽快参考帮助文档：https://dwz.ovh/jvr2t 加固安全设置！<br /><br />");
@@ -1070,7 +1070,7 @@ function getQueryVariable(variable)
 
 //获取最新版本
 function get_latest_version(){
-    $.post("/index.php?c=api&method=get_latest_version",function(data,status){
+    $.post("./index.php?c=api&method=get_latest_version",function(data,status){
         //console.log(data.data);
         
         
@@ -1081,7 +1081,7 @@ function get_latest_version(){
         // 改变显示内容
         let new_version = `
 <a href="https://github.com/helloxz/onenav/releases" title="下载最新版OneNav" target="_blank" id="latest_version">${latest_version}</a> 
-[<a href="/index.php?c=admin&page=setting/subscribe" title="订阅后可一键更新">一键更新</a>]
+[<a href="./index.php?c=admin&page=setting/subscribe" title="订阅后可一键更新">一键更新</a>]
 `;
         $("#new_version").html(new_version);
         $("#new_version").show();
@@ -1107,7 +1107,7 @@ function set_link_attribute(ids,property) {
       layer.msg("请先选择链接!",{icon:5});
     }
     else{
-      $.post("/index.php?c=api&method=set_link_attribute",{ids:ids,property:property},function(data,status){
+      $.post("./index.php?c=api&method=set_link_attribute",{ids:ids,property:property},function(data,status){
         if( data.code == 200 ){
           layer.msg("设置已更新！",{icon:1});
         }
@@ -1162,7 +1162,7 @@ function delete_theme(name) {
 
 //验证是否订阅
 function check_subscribe(msg) {
-  $.get("/index.php?c=api&method=check_subscribe",function(data,status){
+  $.get("./index.php?c=api&method=check_subscribe",function(data,status){
     if( data.code == 200 ) {
       return true;
     }
@@ -1204,7 +1204,7 @@ function del_link_icon(){
     return true;
   }
 
-  $.post("/index.php?c=api&method=del_link_icon",{icon_path:icon_path},function(data,status){
+  $.post("./index.php?c=api&method=del_link_icon",{icon_path:icon_path},function(data,status){
     if( data.code == 200 ) {
       $("#font_icon").val("");
       $("#show_icon img").attr("src","");

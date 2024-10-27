@@ -227,7 +227,7 @@ function open_add_link(){
     maxmin: true,
     shadeClose: true, //点击遮罩关闭层
     area : ['800px' , '520px'],
-    content: '/index.php?c=admin&page=add_link_tpl'
+    content: './index.php?c=admin&page=add_link_tpl'
   });
 }
 //搜索框失去焦点

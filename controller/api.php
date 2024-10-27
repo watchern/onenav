@@ -666,5 +666,5 @@ function global_search() {
 // 上传数据备份文件
 function upload_backup(){
     global $api;
-    $api->general_upload('data/backup/',['db3']);
+    $api->general_upload('./data/backup/',['db3']);
 }

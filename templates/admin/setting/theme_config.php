@@ -52,7 +52,7 @@ layui.use(['layer','form'], function(){
 
     form.on('submit(save_theme_config)', function(data){
         console.log(data.field);
-        $.post("/index.php?c=api&method=save_theme_config",data.field,function(data,status){
+        $.post("./index.php?c=api&method=save_theme_config",data.field,function(data,status){
             if( data.data == 'success') {
                 layer.msg("设置已更新！",{icon:1});
             }
@@ -66,7 +66,7 @@ layui.use(['layer','form'], function(){
 });
 
 function set_theme(name) {
-    $.post("/index.php?c=api&method=set_theme",{key:"theme",value:name},function(data,status){
+    $.post("./index.php?c=api&method=set_theme",{key:"theme",value:name},function(data,status){
         if( data.code == 0 ) {
             layer.msg(data.data, {icon: 1});
             setTimeout(() => {

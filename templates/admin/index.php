@@ -32,7 +32,7 @@
                 <div class = "admin-msg">
                   <h2>分类数量</h2>
                   <p class="text">
-                    <a href="/index.php?c=admin&page=category_list"><span id="cat_num"></span></a>
+                    <a href="./index.php?c=admin&page=category_list"><span id="cat_num"></span></a>
                   </p>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 <div class = "admin-msg">
                   <h2>链接数量</h2>
                   <p class="text">
-                    <a href="/index.php?c=admin&page=link_list"><span id="link_num"></span></a>
+                    <a href="./index.php?c=admin&page=link_list"><span id="link_num"></span></a>
                   </p>
                 </div>
             </div>
@@ -139,7 +139,7 @@
   // 获取app_info
   function app_info(){
     //alert("dsdfd");
-    let api_url = "/index.php?c=api&method=app_info";
+    let api_url = "./index.php?c=api&method=app_info";
     console.log(api_url);
     $.get(api_url,function(data,status){
       data = data.data;

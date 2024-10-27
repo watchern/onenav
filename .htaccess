@@ -1,3 +1,10 @@
+php_value display_errors On
+php_value mbstring.http_input auto
+php_value date.timezone Asia/Shanghai
+ErrorDocument 400 /err/500/index.html
+ErrorDocument 404 /err/404/index.html
+ErrorDocument 500 /err/500/index.html
+
 RewriteEngine On
 RewriteRule '^click\/(.*)$' /index.php?c=click&id=$1 [L] 
 RewriteRule '^api\/(.*)?(.*)$' /index.php?c=api&method=$1&$2 [L] 

@@ -165,7 +165,7 @@ if ( !empty($cid) ) {
 
 //获取版本号
 function get_version(){
-    if( file_exists('version.txt') ) {
+    if( file_exists('./version.txt') ) {
         $version = @file_get_contents('version.txt');
         return $version;
     }
@@ -193,8 +193,8 @@ function base64($url){
 //获取版本号
 $version = get_version();
 //载入js扩展
-if( file_exists('data/extend.js') ) {
-    $onenav['extend'] = '<script src = "data/extend.js"></script>';
+if( file_exists('./data/extend.js') ) {
+    $onenav['extend'] = '<script src = "./data/extend.js"></script>';
 }
 else{
     $onenav['extend'] = '';
@@ -226,17 +226,17 @@ if( !empty($theme) ) {
 
 
 //获取主题配置信息
-if( file_exists("templates/".$template."/config.json") ) {
-    $config_file = "templates/".$template."/config.json";
+if( FILE_EXISTS("./templates/".$template."/config.json") ) {
+    $config_file = "./templates/".$template."/config.json";
 }
-else if( file_exists("data/templates/".$template."/config.json") ) {
-    $config_file = "data/templates/".$template."/config.json";
+else if( FILE_EXISTS("./data/templates/".$template."/config.json") ) {
+    $config_file = "./data/templates/".$template."/config.json";
 }
-else if( file_exists("templates/".$template."/info.json") ) {
-    $config_file = "templates/".$template."/info.json";
+else if( FILE_EXISTS("./templates/".$template."/info.json") ) {
+    $config_file = "./templates/".$template."/info.json";
 }
 else {
-    $config_file = "data/templates/".$template."/info.json";
+    $config_file = "./data/templates/".$template."/info.json";
 }
 
 //读取主题配置

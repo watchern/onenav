@@ -64,7 +64,7 @@
     // 渲染
     upload.render({
       elem: '.upload-bakcup', // 绑定多个元素
-      url: '/index.php?c=api&method=upload_backup', // 设置上传接口
+      url: './index.php?c=api&method=upload_backup', // 设置上传接口
       accept: 'file', // 普通文件
       exts:'db3', // 允许的后缀
       before: function(obj){ // 选择文件后
@@ -104,7 +104,7 @@
     table.render({
     elem: '#mytable'
     ,id: 'tableid'
-    ,url:'/index.php?c=api&method=backup_db_list' // 此处为静态模拟数据，实际使用时需换成真实接口
+    ,url:'./index.php?c=api&method=backup_db_list' // 此处为静态模拟数据，实际使用时需换成真实接口
     ,toolbar: '#toolbarheader'
     ,totalRow: true // 开启合计行
     ,cols: [[
@@ -124,7 +124,7 @@
     var checkStatus = table.checkStatus(obj.config.id);
     switch(obj.event){
       case 'backup':
-        $.get("/index.php?c=api&method=backup_db",function(data,status){
+        $.get("./index.php?c=api&method=backup_db",function(data,status){
           if( data.code == 200 ) {
             layer.msg('备份成功！',{icon:1});
             //刷新表格
@@ -152,7 +152,7 @@
     if(layEvent === 'restore'){ //回滚
       layer.confirm('确定回滚吗？', {icon:3,title:'提示'},function(index){
         
-        $.get("/index.php?c=api&method=restore_db",{name:data.name},function(data,status){
+        $.get("./index.php?c=api&method=restore_db",{name:data.name},function(data,status){
           if(data.code == 200) {
             layer.close(index);
             layer.msg('回滚成功！',{icon:1})
@@ -174,7 +174,7 @@
     else if(layEvent === 'del'){ //删除
       layer.confirm('确定删除吗？', {icon:3,title:'提示'},function(index){
         
-        $.get("/index.php?c=api&method=del_backup_db",{name:data.name},function(data,status){
+        $.get("./index.php?c=api&method=del_backup_db",{name:data.name},function(data,status){
           if(data.code == 200) {
             obj.del(); // 删除对应行（tr）的 DOM 结构，并更新缓存
             layer.close(index);

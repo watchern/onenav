@@ -7,7 +7,7 @@
     <!-- 说明提示框 -->
     <div class="layui-col-lg12">
       <div class="setting-msg">
-        <p>1. 注意：当分类下存在链接时，此分类不允许删除，如果需要删除分类请先前往【<a href = "/index.php?c=admin&page=link_list">我的链接</a>】删除此分类下的所有链接后再操作！</p>
+        <p>1. 注意：当分类下存在链接时，此分类不允许删除，如果需要删除分类请先前往【<a href = "./index.php?c=admin&page=link_list">我的链接</a>】删除此分类下的所有链接后再操作！</p>
       </div>
     </div>
     <!-- 说明提示框END -->
@@ -69,7 +69,7 @@ function set_cat_batch(ids,property) {
       layer.msg("请先选择分类!",{icon:5});
     }
     else{
-      $.post("/index.php?c=api&method=set_cat_batch",{ids:ids,property:property},function(data,status){
+      $.post("./index.php?c=api&method=set_cat_batch",{ids:ids,property:property},function(data,status){
         if( data.code == 200 ){
             layui.use(function(){
                 var table = layui.table;

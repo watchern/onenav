@@ -14,22 +14,25 @@ function check_env() {
     $php_version = floatval(PHP_VERSION);
     $uri = $_SERVER["REQUEST_URI"];
     
-    if( ( $php_version < 5.6 ) || ( $php_version > 8 ) ) {
-        exit("当前PHP版本{$php_version}不满足要求，需要5.6 <= PHP <= 7.4");
+    if( ( $php_version < 5.6 )) {
+        err_msg(-2000,"CHECK当前PHP版本{$php_version}不满足要求，需要5.6 <= PHP");
+        exit();
     }
     
     //检查是否支持pdo_sqlite
     if ( !array_search('pdo_sqlite',$ext) ) {
-        exit("不支持PDO_SQLITE组件，请先开启!");
+        err_msg(-2000,"CHECK不支持PDO_SQLITE组件，请先开启!");
+        exit();
     }
     //如果配置文件存在
-    if( file_exists("data/config.php") ) {
-        exit("配置文件已存在，无需再次初始化!");
+    if( file_exists("./data/config.php") ) {
+        err_msg(-2000,'CHECK配置文件已存在，无需再次初始化！');
+        exit();
     }
     //检查是否是二级目录
     $pattern = '/\/[a-z0-9\/]+$/';
     if( preg_match_all($pattern,$uri) ) {
-        exit("暂不支持二级目录安装!");
+        // exit("暂不支持二级目录安装!");
     }
     return TRUE;
 }
@@ -41,7 +44,7 @@ function install() {
     if( !file_exists('./data/config.php') ) {
         //复制配置文件
         //加载初始化模板
-        require("templates/admin/init.php");
+        require("./templates/admin/init.php");
         exit();
     }
     else {
@@ -64,27 +67,27 @@ function err_msg($code,$err_msg){
 function init($data){
     //判断参数是否为空
     if( empty($data['username']) || empty($data['password']) ) {
-        err_msg(-2000,'用户名或密码不能为空！');
+        err_msg(-2000,'INIT用户名或密码不能为空！');
     }
     // 正则验证用户名
     $u_patt = '/^[0-9a-z]{3,32}$/';
     if( !preg_match($u_patt,$data['username']) ) {
-        err_msg(-2000,'用户名格式不正确！');
+        err_msg(-2000,'INIT用户名格式不正确！');
     }
     // 正则验证密码
     $p_patt = '/^[0-9a-zA-Z!@#%^*.()]{6,16}$/';
     if( !preg_match($p_patt,$data['password']) ) {
-        err_msg(-2000,'密码格式不正确！');
+        err_msg(-2000,'INIT密码格式不正确！');
     }
-    $config_file = "data/config.php";
+    $config_file = "./data/config.php";
     //检查配置文件是否存在，存在则不允许设置
     if( file_exists($config_file) ) {
-        err_msg(-2000,'配置文件已存在，无需再次初始化！');
+        err_msg(-2000,'INIT配置文件已存在，无需再次初始化！');
     }
     //复制配置文件
     
     //读取配置文件内容
-    $content = file_get_contents("config.simple.php");
+    $content = file_get_contents("./config.simple.php");
     //替换内容
     $content = str_replace('{email}',$data['email'],$content);
     $content = str_replace('{username}',$data['username'],$content);
@@ -92,13 +95,13 @@ function init($data){
 
     //写入配置文件
     if( !file_put_contents($config_file,$content) ) {
-        err_msg(-2000,'写入配置文件失败，请检查目录权限！');
+        err_msg(-2000,'INIT写入配置文件失败，请检查目录权限！');
     }
     else{
         //成功并返回json格式
         $data = [
             'code'      =>  200,
-            'msg'        =>  "初始化完成！"
+            'msg'        =>  "INIT初始化完成！"
         ];
         header('Content-Type:application/json; charset=utf-8');
         exit(json_encode($data));

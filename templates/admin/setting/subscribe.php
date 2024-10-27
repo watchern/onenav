@@ -153,7 +153,7 @@
             update_status("1%","准备更新...");
             $("#update_log").append("准备更新...\n");
             //第一步检查更新信息
-            $.get("/index.php?c=api&method=check_subscribe",function(data,status){
+            $.get("./index.php?c=api&method=check_subscribe",function(data,status){
                 update_status("10%","正在验证订阅信息...");
                 $("#update_log").append("正在验证订阅信息...<br />");
                 if( data.code == 200 ) {
@@ -165,7 +165,7 @@
                     var key = data.data.key;
                     var value = data.data.value;
                     //下载更新程序
-                    $.get("/index.php?c=api&method=up_updater",function(data,status) {
+                    $.get("./index.php?c=api&method=up_updater",function(data,status) {
                         update_status("50%","正在检查更新程序...");
                         $("#update_log").append("正在检查更新程序...<br />");
                         if( data.code == 200 ) {
@@ -180,7 +180,7 @@
                                 $("#update_log").append("升级包下载完毕，正在校验版本...<br />");
                                 if( data.code == 200 ) {
                                     //校验新版本
-                                    $.get("/index.php?c=api&method=check_version",{version:new_version},function(data,status){
+                                    $.get("./index.php?c=api&method=check_version",{version:new_version},function(data,status){
                                         if(data.code == 200) {
                                             update_status("100%","更新完成，5s后自动跳转到后台首页检查数据库更新！");
                                             $("#update_log").append("更新完成，5s后自动跳转到后台首页检查数据库更新！<br />");
@@ -188,12 +188,12 @@
                                             //$("#btn_updating").hide();
                                             $("#btn_updating").show();
                                             //备份数据库
-                                            $.get("/index.php?c=api&method=backup_db",function(data,status){
+                                            $.get("./index.php?c=api&method=backup_db",function(data,status){
                                             if( data.code == 200 ) {
                                                 console.log('数据库备份成功！');
                                                 //3s后跳转到后台首页，方便更新数据库
                                                 setTimeout(() => {
-                                                    window.location = "/index.php?c=admin";
+                                                    window.location = "./index.php?c=admin";
                                                 }, 5000);
                                             }
                                             else{

@@ -56,7 +56,7 @@
                                 <button type="button" class="layui-btn layui-btn-sm" onclick = "theme_detail('<?php echo $key; ?>')">详情</button>
                                 <button type="button" class="layui-btn layui-btn-sm" onclick = "theme_config('<?php echo $key; ?>')">参数设置</button>
                                 <button type="button" class="layui-btn layui-btn-sm" onclick = "update_theme('<?php echo $key; ?>','<?php echo $theme['info']->version; ?>')">更新</button>
-                                <a class="layui-btn layui-btn-sm" target = "_blank" href="/index.php?theme=<?php echo $key;  ?>">预览</a>
+                                <a class="layui-btn layui-btn-sm" target = "_blank" href="./index.php?theme=<?php echo $key;  ?>">预览</a>
                                 <button type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick = "delete_theme('<?php echo $key; ?>')">删除</button>
                             </div>
                         </div>
@@ -118,7 +118,7 @@ function theme_detail(name){
         title: name,
         type:2,
         area: ['60%', '59%'],
-        content:'/index.php?c=admin&page=setting/theme_detail&name=' + name
+        content:'./index.php?c=admin&page=setting/theme_detail&name=' + name
     });   
 }
 
@@ -127,7 +127,7 @@ function theme_detail_online(name){
         title: name,
         type:2,
         area: ['60%', '59%'],
-        content:'/index.php?c=admin&page=setting/theme_detail&name=' + name
+        content:'./index.php?c=admin&page=setting/theme_detail&name=' + name
     });   
 }
 //主题参数设置
@@ -136,12 +136,12 @@ function theme_config(name){
         title: "设置主题【" + name + "】参数：",
         type:2,
         area: ['620px', '560px'],
-        content:'/index.php?c=admin&page=setting/theme_config&name=' + name
+        content:'./index.php?c=admin&page=setting/theme_config&name=' + name
     });
 }
 
 function set_theme(name) {
-    $.post("/index.php?c=api&method=set_theme",{key:"theme",value:name},function(data,status){
+    $.post("./index.php?c=api&method=set_theme",{key:"theme",value:name},function(data,status){
         if( data.code == 0 ) {
             layer.msg(data.data, {icon: 1});
             setTimeout(() => {
@@ -158,19 +158,19 @@ function down_theme(name,type) {
     //请求订阅接口，并获取key、value
     var index = layer.load(1);
     // $.ajax({
-    //     'url': '/index.php?c=api&method=check_subscribe',
+    //     'url': './index.php?c=api&method=check_subscribe',
     //     'type': 'GET',
     //     'async': false,
     //     success:function(result) {
             
     //     }
     // });
-    $.get("/index.php?c=api&method=check_subscribe",function(result,status){
+    $.get("./index.php?c=api&method=check_subscribe",function(result,status){
         if( result.code == 200 ) {
             var key = result.data.key;
             var value = result.data.value;
             //继续下载主题
-            $.get("/index.php?c=api&method=down_theme",{name:name,key:key,value:value,type:type},function(data,status){
+            $.get("./index.php?c=api&method=down_theme",{name:name,key:key,value:value,type:type},function(data,status){
                 //如果下载成功
                 if( data.code == 200 ) {
                     layer.closeAll('loading');

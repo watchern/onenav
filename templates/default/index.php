@@ -51,9 +51,9 @@
 	  <?php
 		if( is_login() ) {
 	  ?>	
-	  <a class = "mdui-hidden-xs" href="/index.php?c=admin" title = "后台管理" target="_blank" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></a>
+	  <a class = "mdui-hidden-xs" href="./index.php?c=admin" title = "后台管理" target="_blank" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></a>
 	  <?php }else{ ?>
-		<a class = "mdui-hidden-xs" href="/index.php?c=login" title = "登录OneNav" target="_blank" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></a>
+		<a class = "mdui-hidden-xs" href="./index.php?c=login" title = "登录OneNav" target="_blank" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></a>
 	  <?php } ?>
     </a>
 		</div>
@@ -126,13 +126,13 @@
 		<?php
 			if ( !is_login() ) {
 		?>
-		<a href="/index.php?c=login" title="手机登录" class="mdui-hidden-sm-up">
+		<a href="./index.php?c=login" title="手机登录" class="mdui-hidden-sm-up">
 			<li class="mdui-list-item mdui-ripple">
 			<div class="mdui-list-item-content category-name"><i class="fa fa-dashboard"></i> 登录</div>
 			</li>
 		</a>
 		<?php } else { ?>
-		<a href="/index.php?c=mobile" title="后台管理" class="mdui-hidden-sm-up">
+		<a href="./index.php?c=mobile" title="后台管理" class="mdui-hidden-sm-up">
 			<li class="mdui-list-item mdui-ripple">
 			<div class="mdui-list-item-content category-name"><i class="fa fa-dashboard"></i> 后台管理</div>
 		</li>
@@ -196,7 +196,7 @@
 						$url = $link['url'];
 					}
 					else{
-						$url = '/index.php?c=click&id='.$link['id'];
+						$url = './index.php?c=click&id='.$link['id'];
 					}
 				//var_dump($link);
 			?>
@@ -220,7 +220,7 @@
 										<?php if( $theme_config->favicon == "online") { ?>
 											<img src="https://favicon.png.pub/v1/<?php echo base64($link['url']); ?>" alt="HUAN" width="16" height="16">
 										<?php }else{ ?>
-											<img src="/index.php?c=ico&text=<?php echo $link['title']; ?>" alt="" width="16" height="16" />
+											<img src="./index.php?c=ico&text=<?php echo $link['title']; ?>" alt="" width="16" height="16" />
 										<?php } ?>
 										<span class="link_title"><?php echo $link['title']; ?></span> 
 									</div>
@@ -238,14 +238,14 @@
 			<?php
 				if( !isset($_GET['cid']) && get_links_number($fid) > $link_num  ) {
 			?>
-			<a href="/index.php?cid=<?php echo $category['id']; ?>" title = "点此可查看该分类下的所有链接">
+			<a href="./index.php?cid=<?php echo $category['id']; ?>" title = "点此可查看该分类下的所有链接">
 				<div class="mdui-col-lg-2 mdui-col-md-3 mdui-col-sm-4 mdui-col-xs-6 link-space">
 					<!--定义一个卡片-->
 					<div class="mdui-card link-line mdui-hoverable">
 						<div class="mdui-card-primary" style = "padding-top:16px;">
 								<div class="mdui-card-primary-title link-title">
 									<!-- 网站图标显示方式 -->
-									<img src="/index.php?c=ico&text=更" alt="" width="16" height="16" />
+									<img src="./index.php?c=ico&text=更" alt="" width="16" height="16" />
 									<span class="link_title">查看更多>></span> 
 								</div>
 						</div>
@@ -286,7 +286,7 @@
 <script src = 'static/jQuery-contextMenu/jquery.contextMenu.min.js'></script>
 <script src = 'static/js/clipBoard.min.js'></script>
 <script src = 'static/js/qrcode.min.js'></script>
-<script src = "templates/<?php echo $template; ?>/static/holmes.js"></script>
+<script src = "./templates/<?php echo $template; ?>/static/holmes.js"></script>
 <script src="templates/<?php echo $template; ?>/static/embed.js?v=<?php echo $version; ?>"></script>
 <script>
 <?php echo $onenav['right_menu']; ?>

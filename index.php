@@ -13,12 +13,12 @@ $c = strip_tags($c);
 //载入配置文件
 //如果配置文件不存在，则载入初始化文件
 if( !file_exists('./data/config.php') ) {
-	include_once("controller/init.php");
+	include_once("./controller/init.php");
 	//exit('<h3>配置文件不存在，请将站点目录下的config.simple.php复制为data/config.php</h3>');
 }
 //检查数据库是否存在，不存在则复制数据库
 if( !file_exists('./data/onenav.db3') ) {
-	if ( !copy('db/onenav.simple.db3','data/onenav.db3') ) {
+	if ( !copy('./db/onenav.simple.db3','./data/onenav.db3') ) {
 		exit("数据库复制失败，请检查目录权限！");
 	}
 	// copy('db/.htaccess','data/.htaccess');

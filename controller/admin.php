@@ -63,15 +63,15 @@ if ( $page == "setting/theme_config" ){
     $name = trim($_GET['name']);
     //获取主题目录
     if ( is_dir("templates/".$name) ) {
-        $theme_dir = "templates/".$name;
+        $theme_dir = "./templates/".$name;
     }
     else{
-        $theme_dir = "data/templates/".$name;
+        $theme_dir = "./data/templates/".$name;
     }
     //读取主题配置
     $config_content = @file_get_contents("templates/".$name."/info.json");
     if( !$config_content ) {
-        $config_content = @file_get_contents("data/templates/".$name."/info.json");
+        $config_content = @file_get_contents("./data/templates/".$name."/info.json");
     }
     $configs = json_decode($config_content);
     $configs = $configs->config;

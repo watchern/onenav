@@ -113,7 +113,7 @@
       //return false;
 
       //return false;
-      $.post("/index.php?c=api&method=create_share",data.field,function(data,status){
+      $.post("./index.php?c=api&method=create_share",data.field,function(data,status){
         if( data.code == 200 ) {
           layer.msg("成功！",{icon:1});
           //重载表格
@@ -151,7 +151,7 @@
     elem: '#mytable'
     ,id: 'tableid'
     ,page: true
-    ,url:'/index.php?c=api&method=share_list' // 此处为静态模拟数据，实际使用时需换成真实接口
+    ,url:'./index.php?c=api&method=share_list' // 此处为静态模拟数据，实际使用时需换成真实接口
     // ,toolbar: '#toolbarheader'
     // ,totalRow: true // 开启合计行
     ,cols: [[
@@ -159,7 +159,7 @@
       ,{field:'sid', title:'SID',width:110,templet:function(d){
         let sid = d.sid;
         
-        return `<a href = "/index.php?c=universal#/share/${sid}" target = "_blank" title = "点击打开">${sid}</a>`;
+        return `<a href = "./index.php?c=universal#/share/${sid}" target = "_blank" title = "点击打开">${sid}</a>`;
       }}
       ,{field:'category_name', title:'分类名称',width:200}
       ,{field:'add_time', title: '添加时间', width:240}
@@ -189,7 +189,7 @@
     var checkStatus = table.checkStatus(obj.config.id);
     switch(obj.event){
       case 'share':
-        $.get("/index.php?c=api&method=backup_db",function(data,status){
+        $.get("./index.php?c=api&method=backup_db",function(data,status){
           if( data.code == 200 ) {
             layer.msg('备份成功！',{icon:1});
             //刷新表格
@@ -234,7 +234,7 @@
     else if(layEvent === 'del'){ //删除
       layer.confirm('确定删除吗？', {icon:3,title:'提示'},function(index){
         
-        $.get("/index.php?c=api&method=del_share&id=" + data.id,function(data,status){
+        $.get("./index.php?c=api&method=del_share&id=" + data.id,function(data,status){
           if(data.code == 200) {
             obj.del(); // 删除对应行（tr）的 DOM 结构，并更新缓存
             layer.close(index);

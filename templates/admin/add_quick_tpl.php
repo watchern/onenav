@@ -72,7 +72,7 @@
 				form.render();
 				//添加链接
 				form.on('submit(add_link)', function(data) {
-					$.post('/index.php?c=api&method=add_link', data.field, function(data, status) {
+					$.post('./index.php?c=api&method=add_link', data.field, function(data, status) {
 						//如果添加成功
 						if(data.code == 0) {
 							layer.msg('保存成功', {

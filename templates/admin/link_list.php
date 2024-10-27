@@ -106,7 +106,7 @@ layui.use(['table','form'], function(){
 
         // 请求后端API
         $.ajax({
-            url: '/index.php?c=api&method=edit_link_row',
+            url: './index.php?c=api&method=edit_link_row',
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',

@@ -569,10 +569,10 @@ class Api {
                 $this->err_msg(-1014,'Unsupported file suffix name!');
             }
             
-            if( copy($temp,'data/'.$filename) ) {
+            if( copy($temp,'./data/'.$filename) ) {
                 $data = [
                     'code'      =>  0,
-                    'file_name' =>  'data/'.$filename
+                    'file_name' =>  './data/'.$filename
                 ];
                 exit(json_encode($data));
             }
@@ -676,7 +676,7 @@ class Api {
             }
             
             //上传路径，格式为data/upload/202212/1669689755.png
-            $upload_path = "data/upload/".date( "Ym", time() ).'/'.$icon_name.'.'.$suffix;
+            $upload_path = "./data/upload/".date( "Ym", time() ).'/'.$icon_name.'.'.$suffix;
 
             //如果目录不存在，则创建
             $upload_dir = dirname($upload_path);
@@ -1244,7 +1244,7 @@ class Api {
         // }
         //写入文件
         try{
-            file_put_contents("data/extend.js",$content);
+            file_put_contents("./data/extend.js",$content);
             $data = [
                 'code'      =>  0,
                 'data'      =>  'success'
@@ -1301,7 +1301,7 @@ class Api {
             $this->err_msg(-1002,'Authorization failure!');
         }
         //待更新的数据库文件目录
-        $sql_dir = 'db/sql/';
+        $sql_dir = './db/sql/';
         //待更新的sql文件列表，默认为空
         $sql_files_all = [];
         //打开一个目录，读取里面的文件列表
@@ -1327,7 +1327,7 @@ class Api {
         if ( $num === 0 ) {
             $data = [
                 "code"      =>  0,
-                "data"      =>  ['on_db_logs.sql']
+                "./data"      =>  ['on_db_logs.sql']
             ];
             exit(json_encode($data));
         }else{
@@ -1351,7 +1351,7 @@ class Api {
             
             $data = [
                 "code"      =>  0,
-                "data"      =>  $diff_result
+                "./data"      =>  $diff_result
             ];
             exit(json_encode($data));
         }
@@ -1366,7 +1366,7 @@ class Api {
             $this->err_msg(-1002,'Authorization failure!');
         }
         //数据库sql目录
-        $sql_dir = 'db/sql/';
+        $sql_dir = './db/sql/';
         $name = $data['name'];
         //查询sql是否已经执行过
         $count = $this->db->count("on_db_logs",[
@@ -1442,10 +1442,10 @@ class Api {
         
         //获取主题配置文件config.json
         if ( is_dir("templates/".$name) ) {
-            $config_file = "templates/".$name."/config.json";
+            $config_file = "./templates/".$name."/config.json";
         }
         else{
-            $config_file = "data/templates/".$name."/config.json";
+            $config_file = "./data/templates/".$name."/config.json";
         }
         
         $config_content = json_encode($config,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
@@ -1479,11 +1479,11 @@ class Api {
             $this->return_json(-2000,'',"使用中的主题不允许删除！");
         }
         //删除主题
-        $this->deldir("templates/".$name);
+        $this->deldir("./templates/".$name);
         
-        $this->deldir("data/templates/".$name);
+        $this->deldir("./data/templates/".$name);
         //判断主题文件夹是否还存在
-        if( is_dir("templates/".$name) || is_dir("data/templates/".$name) ) {
+        if( is_dir("./templates/".$name) || is_dir("./data/templates/".$name) ) {
             $this->return_json(-2000,'',"删除失败，可能是权限不足！");
         }
         else{
@@ -1524,17 +1524,17 @@ class Api {
         ]);
         //获取主题配置信息
         //获取主题配置
-        if( file_exists("templates/".$template."/config.json") ) {
-            $config_file = "templates/".$template."/config.json";
+        if( file_exists("./templates/".$template."/config.json") ) {
+            $config_file = "./templates/".$template."/config.json";
         }
-        else if( file_exists("data/templates/".$template."/config.json") ) {
-            $config_file = "data/templates/".$template."/config.json";
+        else if( file_exists("./data/templates/".$template."/config.json") ) {
+            $config_file = "./data/templates/".$template."/config.json";
         }
-        else if( file_exists("templates/".$template."/info.json") ) {
-            $config_file = "templates/".$template."/info.json";
+        else if( file_exists("./templates/".$template."/info.json") ) {
+            $config_file = "./templates/".$template."/info.json";
         }
         else {
-            $config_file = "data/templates/".$template."/info.json";
+            $config_file = "./data/templates/".$template."/info.json";
         }
 
         //读取主题配置
@@ -1744,8 +1744,8 @@ class Api {
         $this->auth($token);
         //检查主题是否已经存在
         if ( $data['type'] == 'download' ) {
-            $theme1 = "templates/".$name;
-            $theme2 = "data/templates/".$name;
+            $theme1 = "./templates/".$name;
+            $theme2 = "./data/templates/".$name;
 
             if( is_dir($theme1) || is_dir($theme2) ) {
                 $this->return_json(-2000,'','主题已存在，无需重复下载！');
@@ -1759,10 +1759,10 @@ class Api {
         //判断主题目录是否存在,如果curl_host是alpine，则视为容器，容器则将主题目录设置为data/templates
         $curl_host = curl_version()['host'];
         if( strstr($curl_host,'alpine') ) {
-            $theme_dir = "data/templates";
+            $theme_dir = "./data/templates";
         }
         else{
-            $theme_dir = "templates";
+            $theme_dir = "./templates";
         }
         //主题完整压缩包路径
         $file_name = $theme_dir."/${name}.tar.gz";
@@ -2012,7 +2012,7 @@ class Api {
         //验证订阅
         $this->check_is_subscribe();
 
-        $backup_dir = 'data/backup/';
+        $backup_dir = './data/backup/';
 
         //判断目录是否存在，不存在则创建
         if( !is_dir($backup_dir) ) {
@@ -2029,7 +2029,7 @@ class Api {
             $current_version = str_replace("v","",$current_version[0]);
             $db_name = 'onenav_'.date("YmdHi",time()).'_'.$current_version.'.db3';
             $backup_db_path = $backup_dir.$db_name;
-            copy('data/onenav.db3',$backup_db_path);
+            copy('./data/onenav.db3',$backup_db_path);
             $this->return_json(200,$db_name,'success');
         } catch (\Throwable $th) {
             $this->return_json(-2000,'','备份目录创建失败，请检查目录权限！');
@@ -2046,7 +2046,7 @@ class Api {
         $this->check_is_subscribe();
 
         //备份目录
-        $backup_dir = 'data/backup/';
+        $backup_dir = './data/backup/';
 
         //遍历备份列表
         $dbs = scandir($backup_dir);
@@ -2121,7 +2121,7 @@ class Api {
         }
 
         //数据库目录
-        $backup_dir = 'data/backup/';
+        $backup_dir = './data/backup/';
 
         //删除数据库
         try {
@@ -2151,11 +2151,11 @@ class Api {
         }
 
         //数据库目录
-        $backup_dir = 'data/backup/';
+        $backup_dir = './data/backup/';
 
         //恢复数据库
         try {
-            copy($backup_dir.$name,'data/onenav.db3');
+            copy($backup_dir.$name,'./data/onenav.db3');
             $this->return_json(200,'','数据库已回滚为'.$name);
         } catch (\Throwable $th) {
             $this->return_json(-2000,'',"回滚失败，请检查目录权限！");
@@ -2198,7 +2198,7 @@ class Api {
         }
 
         //数据库目录
-        $backup_dir = 'data/backup/';
+        $backup_dir = './data/backup/';
         
         //拼接数据库路径
         $full_path = $backup_dir.$name;
