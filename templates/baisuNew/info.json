@@ -1,0 +1,19 @@
+{
+	"name": "baisuNew",
+	"description": "BaiSu最新主题",
+	"homepage": "https:\/\/blog.xiaoz.org",
+	"help_url": "https://dwz.ovh/gnae4",
+	"version": "1.0.5",
+	"update": "2024\/05\/22",
+	"author": "百素BaiSu<1099116749@qq.com>",
+	"screenshot": "https://img.rss.ink/imgs/2023/04/25/bcd93b6ee44eb1f3.png",
+	"demo": "",
+	"require": {
+		"min": "0.9.34",
+		"max": ""
+	},
+	"config": {
+		"link_description": "show",
+		"favicon": "online"
+	}
+}

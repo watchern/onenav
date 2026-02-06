@@ -1,0 +1,19 @@
+{
+    "name": "5iux",
+    "description": "来源：https://github.com/5iux/5iux.github.io",
+    "homepage": "https://github.com/5iux/5iux.github.io",
+    "help_url":"https://dwz.ovh/gnae4",
+    "version": "1.1.1",
+    "update": "2023/06/28",
+    "author": "5iux",
+    "screenshot": "https://img.rss.ink/imgs/2022/06/08/401b42279dd971f0.png",
+    "demo":"",
+    "require":{
+        "min":"0.9.31",
+        "max":""
+    },
+    "config": {
+        "link_icon":"text",
+        "shortcut_icon":""
+    }
+}
