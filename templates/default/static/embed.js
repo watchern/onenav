@@ -281,7 +281,7 @@ function change_theme() {
       var docs_theme_layout = "light";
     }
     document.cookie = "docs-theme-layout=" + docs_theme_layout + "; " + expires + " path=/";
-    window.location.href = "/";
+    window.location.href = "./";
 }
 
 

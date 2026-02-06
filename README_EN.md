@@ -43,7 +43,7 @@ OneNav is an open-source, free bookmark (navigation) management program develope
 
 **Regular Installation:**
 
-1. Requires PHP environment and must support SQLite3
+1. Requires PHP>=5.6 environment and must support SQLite3
 2. Download and unzip the source code to the root directory of the site
 3. Visit the homepage and follow the prompts to initialize username/password
 4. Access the backend: `http://IP/index.php?c=login`

@@ -155,13 +155,14 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
     } else if(obj.event === 'edit'){
       // 这是原来老的逻辑，跳转到新的页面进行编辑，不太友好
       // window.location.href = './index.php?c=admin&page=edit_category&id=' + obj.data.id;
+      let height = window.innerHeight - 100
       // 新的逻辑改为当前页面iframe编辑
       layer.open({
         type: 2,
         title: '编辑分类',
         shadeClose: true,
         maxmin: true, //开启最大化最小化按钮
-        area: ['900px', '660px'],
+        area: ['900px', height+'px'],
         content: './index.php?c=admin&page=edit_category_new&id=' + obj.data.id
       });
     }
@@ -359,13 +360,7 @@ layui.use(['element','table','layer','form','upload','iconHhysFa'], function(){
       });
     } else if(obj.event === 'edit'){
       // window.location.href = './index.php?c=admin&page=edit_link&id=' + obj.data.id;
-      let height = window.innerHeight;
-      if( height >= 800 ) {
-        height = 800;
-      }
-      else{
-        height = 700;
-      }
+      let height = window.innerHeight - 100
       // 改成iframe编辑
       layer.open({
         type: 2,
@@ -1260,6 +1255,7 @@ function getCurrentDomain() {
 // 技术支持函数
 function support() {
   let domain = getCurrentDomain();
+  let height = window.innerHeight - 100
   let description = "域名：" + domain; 
   let support_url = "https://support.xiuping.net/service/index?lang=zh_CN&product_id=1&description=" + description;
   layer.open({
@@ -1267,7 +1263,7 @@ function support() {
     title: false,
     shadeClose: true,
     shade: 0.8,
-    area: ['700px', '780px'],
+    area: ['700px', height+'px'],
     content: support_url // iframe 的 url
   });
 }

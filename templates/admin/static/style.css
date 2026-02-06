@@ -234,6 +234,9 @@
     width: 50%;
     float:left;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .them-header .right{
     width: 50%;
