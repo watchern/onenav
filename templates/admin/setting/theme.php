@@ -229,7 +229,6 @@ function update_theme(name,version){
 
 //遍历所有主题，检查是否有更新
 function check_update(){
-    console.log('fdsfsdf');
     //请求远程主题列表
     $.get("https://onenav.xiaoz.top/v1/theme_list.php",function(data,status){
         let result = data.data;
